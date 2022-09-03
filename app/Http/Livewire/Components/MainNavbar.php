@@ -29,7 +29,7 @@ class MainNavbar extends Component
             session()->flash('message', 'Lead not added');
             return;
         }
-
+        $this->dispatchBrowserEvent('deleted', ['message' => 'Enquiry added successfully!']);
         session()->flash('message', 'Lead Added Successfully');
      }
 }

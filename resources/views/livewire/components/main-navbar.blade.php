@@ -83,8 +83,8 @@
   </header><!-- End Header -->
 
   <!-- Enquiry Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <form action="#" class="php-email-form">
+  <div wire:ignore class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <form  wire:submit.prevent="store" class="php-email-form">
             <div class="modal-dialog">
                 <div class="modal-content">
 
@@ -158,7 +158,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="font-size: 16px; padding: 0 20px; transition: 0.3s; border-radius: 50px; height: 40px;">Close</button>
-                        <button wire:model.click="store" type="submit" class="btn btn-primary" style="font-size: 16px; padding: 0 20px; background: #C32621; color: #fff; transition: 0.3s; border-radius: 50px; height: 40px;">Submit Enquiry</button>
+                        <button type="submit" class="btn btn-primary" style="font-size: 16px; padding: 0 20px; background: #C32621; color: #fff; transition: 0.3s; border-radius: 50px; height: 40px;">Submit Enquiry</button>
                     </div>
 
                 </div>
@@ -168,3 +168,13 @@
 
   
 </div>
+
+
+@push('js')
+
+<script>
+  window.addEventListener('deleted', event => {
+    $("#exampleModal").modal('hide');
+  })
+</script>
+@endpush

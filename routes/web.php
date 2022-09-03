@@ -63,6 +63,8 @@ use App\Http\Livewire\Frontend\AdmissionFeComponent;
 
 use App\Http\Livewire\Frontend\StaticPageFeComponent;
 
+use App\Http\Livewire\Frontend\LoginFeComponent;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -80,7 +82,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('admin/news', NewsComponent::class);
+Route::group(['middleware'=>'auth'], function () {
+
+Route::get('admin/news', NewsComponent::class)->name('admin.news');
 Route::get('admin/news/{id}', NewsEditComponent::class)->name('admin.news.edit');
 
 Route::get('admin/company', PlacementCompanyComponent::class);
@@ -125,6 +129,8 @@ Route::get('admin/page_detail_attachment', WebsiteDetailAttachmentsComponent::cl
 Route::get('admin/page_detail_attachment/{id}', WebsiteDetailAttachmentShowComponent::class);
 Route::get('admin/page_detail_attachment/edit/{id}', WebsiteDetailAttachmentEditComponent::class)->name('admin.pagedetailatt.edit');
 
+});
+
 Route::get('/', HomeComponent::class);
 Route::get('/gallery', GalleryFeComponent::class);
 Route::get('/gallery/{id}', GalleryImageFeComponent::class);
@@ -146,3 +152,5 @@ Route::get('/placement', PlacementFeComponent::class);
 Route::get('/admission', AdmissionFeComponent::class);
 
 Route::get('/page/{id}', StaticPageFeComponent::class);
+
+Route::get('/login', LoginFeComponent::class)->name('login');
